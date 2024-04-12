@@ -2,7 +2,7 @@ package service;
 
 import java.util.ArrayList;
 
-public class CuentaMovimiento {
+public class CuentaMovimiento extends CuentaLimite {
 	
 	class cuentaMovimientos extends CuentaLimite{
 		private ArrayList<Movimiento> movimientos = new ArrayList<>();
@@ -13,10 +13,19 @@ public class CuentaMovimiento {
 		}
 		
 		public ArrayList<Movimiento> obtenerMovimientos () {
+			return movimientos;
 			
-			movimientos.add();
 			
-			return ArrayList<Movimiento> ;
+		}
+
+		@Override
+		public void extraer(double cantidad) {
+			 ArrayList<Movimiento> mov = new ArrayList<>(cantidad, LocalDateTime.now());
+			
+			super.extraer(cantidad);
+			
+			mov.addAll(movimientos);
+			 
 		}
 
 }
