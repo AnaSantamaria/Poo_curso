@@ -1,5 +1,6 @@
 package principal;
 
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +14,7 @@ public class Prueba1 {
 		nums.add(25);nums.add(200);nums.add(10);
 		System.out.println(sumarPares(nums));
 		
-		Vector<Integer> nums2 =new Vector<Integer>();
+	
 		
 	
 
@@ -47,3 +48,4 @@ public class Prueba1 {
 		
 	}
 }
+
