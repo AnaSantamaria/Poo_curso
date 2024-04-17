@@ -11,32 +11,32 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 
-public class LectorTeclado extends BufferedReader{
+public class LectorTeclado extends BufferedReader{//clase que hereda de BufferedReader 
 
-	public LectorTeclado(){
+	public LectorTeclado(){//constructor
 		
-		super(new InputStreamReader(System.in));
+		super(new InputStreamReader(System.in));// Inicializa un InputStreamReader
 		
 	}
 	
-	public String readString() {
+	public String readString() {//Metodo public tipo String llamado readString
 		try {
-			return readLine();
+			return readLine();// me devuelve una linea leida
 		} catch (IOException e) {
 			
 			e.printStackTrace();
-			return null; /// Si falla la lectura retornamos null
+			return null; /// Si falla la lectura retornamos null porque el String se inicializa en null
 		}
 		
 	}
 	public int readInt() {  //Leer numeros
 		
 		try {
-			return Integer.parseInt(readLine());
+			return Integer.parseInt(readLine());//"convierte a entero la linea leida
 		} catch (IOException e) {
 			
 			e.printStackTrace();
-			return 0; /// Si falla la lectura retornamos null
+			return 0; /// Si falla la lectura retornamos 0
 		}
 		
 		
