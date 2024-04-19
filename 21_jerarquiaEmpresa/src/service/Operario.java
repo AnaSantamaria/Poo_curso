@@ -19,7 +19,7 @@ public class Operario extends Empleado{
 
 	@Override
 	public void incentivar() {
-		if(getEdad()>30 && nivelSeguridad>2){
+		if(this.getEdad()>30 && nivelSeguridad>2){
 			setSalario(getSalario()+(getBono() * 2));
 		}else if (getEdad()>30 || nivelSeguridad>2) {
 			setSalario(getSalario() + ((getBono())));

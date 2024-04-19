@@ -18,7 +18,8 @@ public class GestionProductoService {
 	-subirPrecioCategoria: Sube el precio a todos los productos de la categoría indicada, en el porcentaje indicado
 
 	-obtenerProductos: Devuelve la lista de productos existentes
-	-agregarProducto: Añade el producto recibido */
+	-agregarProducto: Añade el producto recibido 
+	-ordenarPprPrecio*/
 	
 	List<ProductoBean> productos = new ArrayList<>();
 	
@@ -55,6 +56,12 @@ public class GestionProductoService {
 		
 		return productos;
 		
+		
+	}
+	
+	public void ordenarPorPrecio(double precio) { 
+		//nums.sort((a,b)->Double.compare(a, b));
+		productos.sort((a,b)->Double.compare(a.getPrecio(),b.getPrecio()));
 		
 	}
 }
