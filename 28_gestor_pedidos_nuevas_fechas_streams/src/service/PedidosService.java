@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import model.Pedido;
 
@@ -31,7 +32,7 @@ public class PedidosService {
 		}
 		return pAux;*/
 		return pedidos.stream()
-				.max(Comparator.comparing(p->p.getFechaPedido()));
+				.max(Comparator.comparing((Pedido p)->p.getFechaPedido()).thenComparingInt(p->p.getUnidades()));
 	}
 	
 	public List <Pedido> pedidosEntreFechas(LocalDate f1, LocalDate f2) {
@@ -44,11 +45,12 @@ public class PedidosService {
 		}
 		return aux;*/
 		return pedidos.stream()
-				.filter(p->p.getFechaPedido().compareTo(f1)>=);
+				.filter(p->p.getFechaPedido().compareTo(f1)>=0&&p.getFechaPedido().compareTo(f2)<=0)//Stream<Pedido>
+				.collect(Collectors.toList());
 	}
-	
+	//devuelve el predido mas reciente pero si hay mas de uno, que devuelva el que mas unidades tiene
 	public Pedido pedidoProximoFecha(LocalDate fecha) {
-		Pedido pAux=new Pedido();
+		/*Pedido pAux=new Pedido();
 		pAux.setFechaPedido(LocalDate.of(1, 1, 1));
 		//comparamos la diferencia de días entre la fecha de cada pedido y la 
 		//parámetro, con la diferencia de días entre la fecha auxiliar y la parámetro
@@ -57,8 +59,37 @@ public class PedidosService {
 			if(Math.abs(ChronoUnit.DAYS.between(p.getFechaPedido(), fecha))<
 					Math.abs(ChronoUnit.DAYS.between(pAux.getFechaPedido(), fecha))) {
 				pAux=p;
-			}
+			}*/
+		return pedidos.stream()
+				.min(Comparator.comparingLong(p->Math.abs(ChronoUnit.DAYS.between(p.getFechaPedido(), fecha))))			
+						.orElse(null);
+						
+						
 		}
-		return pAux;
+	
+	//devuelve la lista de pedidos del producto recivido como parametro
+	 public List<Pedido> pedidoLista(String producto){
+		return pedidos.stream()
+				.filter(p->p.getProducto().equalsIgnoreCase(producto))
+				.collect(Collectors.toList()));
+		 
+		 
+	 }
+		public Optional<Pedido> pedidoMenorUnidades (){
+			return pedidos.stream()
+					.min(Comparator.comparingInt(p->p.getUnidades()));
+			
+			
+		}
+		
+		//devuelve una cadena de todos los productos sin duploicar separados por un guion
+		
+		public String nombresProductod() {
+			return pedidos.stream()
+			.map(p->p.getProducto())
+			.distinct()
+			.collect(Collectors.joining("-"));
+			
+		}
 	}
-}
+
